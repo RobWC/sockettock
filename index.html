@@ -1,11 +1,20 @@
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io.connect('http://sockettock.robwc.c9.io');
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
-</script>
-<body>
-Hello
-</body>
+<html>
+  <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+      <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+      <script>
+          var socket = io.connect('http://sockettock.robwc.c9.io');
+          $(document).ready(function(){
+              socket.on('news', function (data) {
+                console.log(data);
+                $('#newsfeed').append($('<p/>',{text:data.headline}));
+                socket.emit('clientnews', {headline: 'Client wins world!' });
+              });
+          });
+    </script>
+  </body>
+  <div id="newsfeed">
+  </div>
+</html>

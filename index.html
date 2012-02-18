@@ -14,7 +14,7 @@
 
               var socket = io.connect();
 
-              $('#testbutt').click(sendMessage(socket));
+              $('#mess').click(sendMessage(socket));
               $('#clear').click(function(){
                 $('#newsfeed').empty();
                 return false;
@@ -31,7 +31,7 @@
   <div id="buttons">
       <form>
         <button id="clear">Clear</button>
-        <button id="testbutt">CLICK ME!</button>
+        <button id="mess">CLICK ME!</button>
       </form>
   </div>
   <div id="newsfeed">

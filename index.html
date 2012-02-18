@@ -10,11 +10,12 @@
             sock.emit('clientnews', {headline: 'Button!'});
             return false;
           };
+
           $(document).ready(function(){
 
               var socket = io.connect();
 
-              $('#mess').click(sendMessage(socket));
+              $('#mess').click(function(){alert('heke')});
               $('#clear').click(function(){
                 $('#newsfeed').empty();
                 return false;

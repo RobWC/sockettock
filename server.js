@@ -12,7 +12,6 @@ function handler(req, res) {
 			res.writeHead(500);
 			return res.end('Error loading index.html');
 		};
-
 		res.writeHead(200);
 		res.end(data);
 	});
@@ -38,6 +37,7 @@ io.sockets.on('connection', function(socket) {
 		headline: 'The world dances'
 	});
 	socket.on('clientnews', function(data) {
-		socket.broadcast.emit('news', {headline:'a client connects!'});
+        var now = new Date().getTime();
+		socket.broadcast.emit('news', {headline:'a client connects!' + now});
 	});
 });

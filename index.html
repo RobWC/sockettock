@@ -10,6 +10,7 @@
 
           var sendmessage = function(){
             socket.emit('clientnews', {headline: 'Button!'});
+            return false;
           };
 
           $(document).ready(function(){
@@ -23,7 +24,7 @@
   </body>
   <div id="buttons">
       <form>
-        <button id="testbutt" onclick="sendmessage()"></button>
+        <button id="testbutt" onclick="sendmessage()">CLICK ME!</button>
       </form>
   </div>
   <div id="newsfeed">

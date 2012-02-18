@@ -5,15 +5,14 @@
   </head>
   <body>
       <script>
+          function sendMessage(sock){
+            console.log('event');
+            sock.emit('clientnews', {headline: 'Button!'});
+            return false;
+          };
           $(document).ready(function(){
 
               var socket = io.connect();
-
-              function sendMessage(sock){
-                console.log('event');
-                sock.emit('clientnews', {headline: 'Button!'});
-                return false;
-              };
 
               $('#testbutt').click(sendMessage(socket));
               $('#clear').click(function(){

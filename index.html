@@ -15,7 +15,6 @@
 
           $(document).ready(function(){
               socket.on('news', function (data) {
-                console.log(data);
                 $('#newsfeed').append($('<p/>',{text:data.headline}));
                 //socket.emit('clientnews', {headline: 'Client wins world!' });
               });

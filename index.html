@@ -5,16 +5,27 @@
   </head>
   <body>
       <script>
+
           var socket = io.connect();
+
+          var sendmessage = function(){
+            socket.emit('clientnews', {headline: 'Button!'});
+          };
+
           $(document).ready(function(){
               socket.on('news', function (data) {
                 console.log(data);
                 $('#newsfeed').append($('<p/>',{text:data.headline}));
-                socket.emit('clientnews', {headline: 'Client wins world!' });
+                //socket.emit('clientnews', {headline: 'Client wins world!' });
               });
           });
     </script>
   </body>
+  <div id="buttons">
+      <form>
+        <button id="testbutt" onclick="sendmessage()"></button>
+      </form>
+  </div>
   <div id="newsfeed">
   </div>
 </html>

@@ -18,6 +18,7 @@
               $('#testbutt').click(sendMessage(socket));
               $('#clear').click(function(){
                 $('#newsfeed').empty();
+                return false;
               });
 
               socket.on('news', function (data) {

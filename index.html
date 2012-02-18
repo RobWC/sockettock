@@ -5,21 +5,22 @@
   </head>
   <body>
       <script>
-
-          var socket = io.connect();
-
-          var sendmessage = function(sock){
-            sock.emit('clientnews', {headline: 'Button!'});
-            return false;
-          };
-
           $(document).ready(function(){
+
+              var socket = io.connect();
+
+              var sendmessage = function(sock){
+                sock.emit('clientnews', {headline: 'Button!'});
+                return false;
+              };
+
               $('#testbutt').click(sendmessage(socket));
 
               socket.on('news', function (data) {
                 $('#newsfeed').append($('<p/>',{text:data.headline}));
                 //socket.emit('clientnews', {headline: 'Client wins world!' });
               });
+
           });
     </script>
   </body>

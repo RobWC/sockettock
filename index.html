@@ -9,7 +9,7 @@
 
               var socket = io.connect();
 
-              var sendMessage = function(sock){
+              function sendMessage(sock){
                 console.log('event');
                 sock.emit('clientnews', {headline: 'Button!'});
                 return false;

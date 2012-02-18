@@ -40,7 +40,4 @@ io.sockets.on('connection', function(socket) {
 	socket.on('clientnews', function(data) {
 		socket.broadcast.emit('news', {headline:'a client connects!'});
 	});
-    while(1){
-        sleep(socket);
-    };
 });

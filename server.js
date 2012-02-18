@@ -35,6 +35,6 @@ io.configure('development', function(){
 io.sockets.on('connection', function(socket) {
 	socket.on('clientnews', function(data) {
         var now = new Date().getTime();
-		socket.broadcast.emit('news', {headline:'a client connects! ' + now});
+		socket.broadcast.emit('news', {headline: data.headline + ' ' + now});
 	});
 });

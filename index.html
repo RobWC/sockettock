@@ -8,12 +8,14 @@
 
           var socket = io.connect();
 
-          var sendmessage = function(){
-            socket.emit('clientnews', {headline: 'Button!'});
+          var sendmessage = function(sock){
+            sock.emit('clientnews', {headline: 'Button!'});
             return false;
           };
 
           $(document).ready(function(){
+              $('#testbutt').click(sendmessage(socket));
+
               socket.on('news', function (data) {
                 $('#newsfeed').append($('<p/>',{text:data.headline}));
                 //socket.emit('clientnews', {headline: 'Client wins world!' });
@@ -23,7 +25,7 @@
   </body>
   <div id="buttons">
       <form>
-        <button id="testbutt" onclick="sendmessage()">CLICK ME!</button>
+        <button id="testbutt">CLICK ME!</button>
       </form>
   </div>
   <div id="newsfeed">

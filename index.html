@@ -9,13 +9,16 @@
 
               var socket = io.connect();
 
-              var sendmessage = function(sock){
+              var sendMessage = function(sock){
                 console.log('event');
                 sock.emit('clientnews', {headline: 'Button!'});
                 return false;
               };
 
-              $('#testbutt').click(sendmessage(socket));
+              $('#testbutt').click(sendMessage(socket));
+              $('#clear').click(function(){
+                $('#newsfeed').empty();
+              });
 
               socket.on('news', function (data) {
                 $('#newsfeed').append($('<p/>',{text:data.headline}));
@@ -27,6 +30,7 @@
   </body>
   <div id="buttons">
       <form>
+        <button id="clear">Clear</button>
         <button id="testbutt">CLICK ME!</button>
       </form>
   </div>

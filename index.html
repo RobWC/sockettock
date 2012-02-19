@@ -8,7 +8,7 @@
             var socket = io.connect();
 
             $('#mess').click(function(){
-              console.log(socket);
+              console.log(socket.socket.sessionid);
               socket.emit('clientnews', {headline: 'Client wins world!' });
               return false;
             });

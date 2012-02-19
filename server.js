@@ -40,7 +40,8 @@ io.configure('development', function(){
 io.sockets.on('connection', function(socket) {
   client.incr('counter');
   socket.on('clientnews', function(data) {
-        var now = new Date().getTime();
+      client.incr('clientnews_counter');
+      var now = new Date().getTime();
 		socket.broadcast.emit('news', {headline: data.headline + ' ' + now});
 	});
 });

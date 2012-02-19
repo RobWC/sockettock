@@ -9,7 +9,7 @@
 
             $('#mess').click(function(){
               console.log(socket.socket.sessionid);
-              socket.emit('clientnews', {headline: 'Client wins world!' });
+              socket.emit('clientnews', {headline:socket.socket.sessionid });
               return false;
             });
 

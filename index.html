@@ -3,26 +3,24 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
       <script src="/socket.io/socket.io.js"></script>
       <script>
-          var sendMessage = function(sock){
-            console.log('event');
-            sock.emit('clientnews', {headline: 'Button!'});
-            return false;
-          };
-
           $(document).ready(function(){
 
-              var socket = io.connect();
+            var socket = io.connect();
 
-              $('#mess').click(sendMessage(socket));
-              $('#clear').click(function(){
-                $('#newsfeed').empty();
-                return false;
-              });
+            $('#mess').click(function(){go
+              socket.emit('clientnews', {headline: 'Client wins world!' });
+              return false;
+            });
 
-              socket.on('news', function(data) {
-                $('#newsfeed').append($('<p/>',{text:data.headline}));
-                //socket.emit('clientnews', {headline: 'Client wins world!' });
-              });
+            $('#clear').click(function(){
+              $('#newsfeed').empty();
+              return false;
+            });
+
+            socket.on('news', function(data) {
+              $('#newsfeed').append($('<p/>',{text:data.headline}));
+              //socket.emit('clientnews', {headline: 'Client wins world!' });
+            });
 
           });
     </script>

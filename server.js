@@ -28,6 +28,7 @@ function sleep(callback) {
   callback.emit('news', {headline: 'Win the war'});
 }
 
+
 io.configure('development', function(){
   io.set('transports', ['websocket']);
 });

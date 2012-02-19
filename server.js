@@ -5,6 +5,7 @@ var app = require('http').createServer(handler),
 var redis = require("redis");
 var client = redis.createClient();
 client.select(2);
+client.set('pants','dirty');
 
 var port = process.env.C9_PORT || 80;
 
@@ -30,8 +31,7 @@ function sleep(callback) {
    // do nothing
   }
   callback.emit('news', {headline: 'Win the war'});
-}
-
+};
 
 io.configure('development', function(){
   io.set('transports', ['websocket']);

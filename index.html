@@ -11,6 +11,7 @@
               console.log(socket.socket.sessionid);
               socket.emit('clientnews', {headline: socket.socket.sessionid + ' ' + $('#gettext').val()});
               $('#newsfeed').append($('<p/>',{text: socket.socket.sessionid + ' ' +  $('#gettext').val()}));
+              $('#gettext').val('');
               return false;
             });
 
@@ -36,7 +37,4 @@
             <button id="clear">Clear</button>
           </form>
       </div>
-      <div id="newsfeed">
-      </div>
-  </body>
-</html
+      <div id="news

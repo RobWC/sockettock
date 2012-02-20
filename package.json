@@ -1,0 +1,12 @@
+{
+  "name": "sockettock",
+  "version": "0.0.3",
+  "dependencies" : {
+      "socket.io" : ">=0.8.7",
+      "redis" : ">=0.6.7",
+      "express" : ">=2.5.8"
+  },
+  "engine": {
+      "node": ">=0.6"
+  }
+}

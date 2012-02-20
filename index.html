@@ -2,6 +2,11 @@
   <head>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
       <script src="/socket.io/socket.io.js"></script>
+      <style type="text/css">
+        div#newsfeed {
+          overflow: scroll;
+        }
+      </style>
       <script>
           $(document).ready(function(){
 
@@ -31,14 +36,14 @@
   </head>
 
   <body>
-      <div id="buttons">
+      <div id="newsfeed">
+      </div>
+            <div id="buttons">
           <form>
             <input type="text" id="gettext"></input>
             <button id="mess" type="submit">Send Message</button>
             <button id="clear">Clear</button>
           </form>
-      </div>
-      <div id="newsfeed">
       </div>
   </body>
 </html>

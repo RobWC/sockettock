@@ -5,7 +5,6 @@ var app = require('http').createServer(handler),
 var redis = require("redis");
 var client = redis.createClient();
 client.select(2);
-client.set('pants','dirty');
 
 var port = process.env.C9_PORT || 80;
 
@@ -20,7 +19,7 @@ function handler(req, res) {
 		res.writeHead(200);
 		res.end(data);
 	});
-}
+};
 
 io.enable('browser client minification');
 io.enable('browser client etag');
@@ -33,8 +32,10 @@ io.sockets.on('connection', function(socket) {
   client.incr('counter');
   socket.on('clientnews', function(data) {
     client.incr('clientnewsCtr');
-    var now = new Date().getTime();
-		socket.broadcast.emit('news', {headline: data.headline + ' ' + now});
+		socket.broadcast.emit('news', {headline: socket.name + ' ' + data.headline});
     client.lpush('clientmgs', data.headline);
 	});
+  socket.on('setname', function(data){
+    socket.name = data.name;
+  });
 });

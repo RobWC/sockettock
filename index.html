@@ -8,9 +8,11 @@
             var socket = io.connect();
 
             $('#mess').click(function(){
+              var text = $('#gettext').val();
+              $('#gettext').val('');
               console.log(socket.socket.sessionid);
-              socket.emit('clientnews', {headline: socket.socket.sessionid + ' ' + $('#gettext').val()});
-              $('#newsfeed').append($('<p/>',{text: socket.socket.sessionid + ' ' +  $('#gettext').val()}));
+              socket.emit('clientnews', {headline: 'U' + socket.socket.sessionid + ' ' + text});
+              $('#newsfeed').append($('<p/>',{text: 'U' + socket.socket.sessionid + ' ' +  text}));
               return false;
             });
 

@@ -25,14 +25,6 @@ function handler(req, res) {
 io.enable('browser client minification');
 io.enable('browser client etag');
 
-function sleep(callback) {
-  var now = new Date().getTime();
-  while(new Date().getTime() < now + 10000) {
-   // do nothing
-  }
-  callback.emit('news', {headline: 'Win the war'});
-};
-
 io.configure('development', function(){
   io.set('transports', ['websocket']);
 });

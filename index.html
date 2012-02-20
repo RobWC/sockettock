@@ -9,7 +9,7 @@
 
             $('#mess').click(function(){
               console.log(socket.socket.sessionid);
-              socket.emit('clientnews', {headline:socket.socket.sessionid });
+              socket.emit('clientnews', {headline: $('#gettext').val()});
               return false;
             });
 
@@ -31,6 +31,7 @@
           <form>
             <button id="clear">Clear</button>
             <button id="mess">CLICK ME!</button>
+            <input type="text" id="gettext"></input>
           </form>
       </div>
       <div id="newsfeed">

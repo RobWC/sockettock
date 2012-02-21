@@ -1,4 +1,4 @@
-var app = require('http').createServer(handler),
+var app = require('express').createServer(),
 	io = require('socket.io').listen(app),
 	fs = require('fs');
 
@@ -8,18 +8,11 @@ client.select(2);
 
 var port = process.env.C9_PORT || 80;
 
-app.listen(port);
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
+});
 
-function handler(req, res) {
-	fs.readFile(__dirname + '/index.html', function(err, data) {
-		if (err) {
-			res.writeHead(500);
-			return res.end('Error loading index.html');
-		};
-		res.writeHead(200);
-		res.end(data);
-	});
-};
+app.listen(port);
 
 io.enable('browser client minification');
 io.enable('browser client etag');

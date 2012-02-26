@@ -31,6 +31,13 @@
               return false;
             });
 
+            $('#setName').click(function(){
+              var newName = $('#nameForm name').val();
+              socket.emit('setname', {name: newName});
+              $('#nameForm').fadeOut('slow');
+              return false;
+            });
+
             socket.on('news', function(data) {
               $('#newsfeed').append($('<p/>',{text:data.headline}));
               //socket.emit('clientnews', {headline: 'Client wins world!' });
@@ -48,6 +55,10 @@
             <input type="text" id="gettext"></input>
             <button id="mess" type="submit">Send Message</button>
             <button id="clear">Clear</button>
+          </form>
+          <form id="nameForm">
+            <input type="text" id="name"></input>
+            <button id="setName" type="submit">Set Name</button>
           </form>
       </div>
   </body>

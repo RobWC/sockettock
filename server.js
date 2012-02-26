@@ -2,6 +2,12 @@ var app = require('express').createServer(),
 	io = require('socket.io').listen(app),
 	fs = require('fs');
 
+var RedisStore = require('connect-redis')(express);
+app.use(express.bodyParser());
+app.use(express.cookieParser());
+app.use(express.session({ secret: "keyboard cat", store: new RedisStore }));
+
+//configure redis
 var redis = require("redis");
 var client = redis.createClient();
 client.select(2);
@@ -29,6 +35,6 @@ io.sockets.on('connection', function(socket) {
     client.lpush('clientmgs', data.headline);
 	});
   socket.on('setname', function(data){
-    socket.name = data.name;
+    socket.name = escape(data.name);
   });
 });

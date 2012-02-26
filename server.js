@@ -1,11 +1,12 @@
 var app = require('express').createServer(),
-	io = require('socket.io').listen(app),
-	fs = require('fs');
+	io = require('socket.io').listen(app);
 
-var RedisStore = require('connect-redis')('express');
+var express = require('express');
+
+var RedisStore = require('connect-redis')(express);
 app.use(express.bodyParser());
 app.use(express.cookieParser());
-app.use(express.session({ secret: "keyboard cat", store: new RedisStore }));
+app.use(express.session({ secret: "cougar show", store: new RedisStore }));
 
 //configure redis
 var redis = require("redis");

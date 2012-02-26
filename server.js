@@ -2,7 +2,7 @@ var app = require('express').createServer(),
 	io = require('socket.io').listen(app),
 	fs = require('fs');
 
-var RedisStore = require('connect-redis')(express);
+var RedisStore = require('connect-redis')('express');
 app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(express.session({ secret: "keyboard cat", store: new RedisStore }));

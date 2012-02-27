@@ -38,7 +38,7 @@ io.sockets.on('connection', function(socket) {
     });
 	});
   socket.on('setname', function(data){
-     socket.set('name', escape(data.name), function () {
+     socket.set('name', escape(data), function () {
       socket.emit('ready');
     });
   });

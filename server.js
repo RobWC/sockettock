@@ -31,11 +31,11 @@ io.configure('development', function(){
 io.sockets.on('connection', function(socket) {
   client.incr('counter');
   socket.on('clientnews', function(data) {
-    client.incr('clientnewsCtr');
     socket.get('name', function (err, name) {
+      client.incr('clientnewsCtr');
   	  socket.broadcast.emit('news', {headline: name + ' ' + data.headline});
+      client.lpush('clientmgs', data.headline);
     });
-    client.lpush('clientmgs', data.headline);
 	});
   socket.on('setname', function(data){
      socket.set('name', escape(data.name), function () {

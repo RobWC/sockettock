@@ -32,7 +32,7 @@
             });
 
             $('#setName').click(function(){
-              var newName = $('#nameForm name').val();
+              var newName = $('#nameForm #name').val();
               socket.emit('setname', {name: newName});
               $('#nameForm').fadeOut('slow');
               return false;

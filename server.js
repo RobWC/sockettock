@@ -32,10 +32,14 @@ io.sockets.on('connection', function(socket) {
   client.incr('counter');
   socket.on('clientnews', function(data) {
     client.incr('clientnewsCtr');
-		socket.broadcast.emit('news', {headline: socket.name + ' ' + data.headline});
+    socket.get('name', function (err, name) {
+  	  socket.broadcast.emit('news', {headline: name + ' ' + data.headline});
+    });
     client.lpush('clientmgs', data.headline);
 	});
   socket.on('setname', function(data){
-    socket.name = escape(data.name);
+     socket.set('name', escape(data.name), function () {
+      socket.emit('ready');
+    });
   });
 });

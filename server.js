@@ -31,21 +31,21 @@ io.enable('browser client etag');
 
 io.configure('development', function(){
   io.set('transports', ['websocket']);
-  io.set('authorization', function (data, accept) {
+  io.set('authorization', function (handshakeData, callback) {
     // check if there's a cookie header
-    if (data.headers.cookie) {
+    if (handshakeData.headers.cookie) {
         // if there is, parse the cookie
-        data.cookie = parseCookie(data.headers.cookie);
+        handshakeData.cookie = parseCookie(handshakeData.headers.cookie);
         // note that you will need to use the same key to grad the
         // session id, as you specified in the Express setup.
-        data.sessionID = data.cookie['express.sid'];
+        handshakeData.sessionID = handshakeData.cookie['connect.sid'];
     } else {
        // if there isn't, turn down the connection with a message
        // and leave the function.
-       return accept('No cookie transmitted.', false);
+       return callback('No cookie transmitted.', false);
     }
     // accept the incoming connection
-    accept(null, true);
+    callback(null, true);
   });
 });
 

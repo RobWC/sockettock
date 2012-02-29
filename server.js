@@ -52,12 +52,13 @@ io.sockets.on('connection', function(socket) {
   socket.on('clientnews', function(data) {
     socket.get('name', function (err, name) {
       client.incr('clientnewsCtr');
-  	  socket.broadcast.emit('news', {headline: name + ' ' + data.headline});
+  	  socket.broadcast.emit('news', {headline: name + ' ' + data.headline + ' add ' + socket.handshake.sessionID });
       client.lpush('clientmgs', data.headline);
     });
 	});
   socket.on('setname', function(data){
      socket.set('name', escape(data.name), function () {
+      socket.broadcast.emit('news', {headline: 'User ' + data.name + ' has joined'})
       socket.emit('ready');
     });
   });

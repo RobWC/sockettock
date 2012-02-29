@@ -21,8 +21,8 @@
               var text = $('#gettext').val();
               $('#gettext').val('');
               console.log(socket.socket.sessionid);
-              socket.emit('clientnews', {headline: 'U' + socket.socket.sessionid + ' ' + text});
-              $('#newsfeed').append($('<p/>',{text: 'U' + socket.socket.sessionid + ' ' +  text}));
+              socket.emit('clientnews', {headline: text});
+              $('#newsfeed').append($('<p/>',{text: 'self ' + text}));
               return false;
             });
 

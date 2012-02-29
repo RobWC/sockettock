@@ -53,6 +53,7 @@ io.sockets.on('connection', function(socket) {
   client.incr('counter');
   socket.on('clientnews', function(data) {
     socket.get('name', function (err, name) {
+      console.log('Cookie Data ' +  socket.handshake.sessionID);
       client.incr('clientnewsCtr');
   	  socket.broadcast.emit('news', {headline: name + ' ' + data.headline + ' add ' + socket.handshake.sessionID });
       client.lpush('clientmgs', data.headline);

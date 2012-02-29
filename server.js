@@ -6,9 +6,12 @@ var parseCookie = require('connect').utils.parseCookie;
 var express = require('express');
 
 var RedisStore = require('connect-redis')(express);
-app.use(express.bodyParser());
-app.use(express.cookieParser());
-app.use(express.session({ secret: "cougar show", store: new RedisStore }));
+
+app.configure(function(){
+  app.use(express.bodyParser());
+  app.use(express.cookieParser());
+  app.use(express.session({ secret: "cougar show", store: new RedisStore }));
+});
 
 //configure redis
 var redis = require("redis");
@@ -28,9 +31,7 @@ io.enable('browser client etag');
 
 io.configure('development', function(){
   io.set('transports', ['websocket']);
-});
-
-io.set('authorization', function (data, accept) {
+  io.set('authorization', function (data, accept) {
     // check if there's a cookie header
     if (data.headers.cookie) {
         // if there is, parse the cookie
@@ -45,6 +46,7 @@ io.set('authorization', function (data, accept) {
     }
     // accept the incoming connection
     accept(null, true);
+  });
 });
 
 io.sockets.on('connection', function(socket) {

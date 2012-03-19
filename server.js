@@ -6,11 +6,12 @@ var parseCookie = require('connect').utils.parseCookie;
 var express = require('express');
 
 var RedisStore = require('connect-redis')(express);
+var sessionStore = express.session({ secret: "cougar show", store: new RedisStore });
 
 app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.cookieParser());
-  app.use(express.session({ secret: "cougar show", store: new RedisStore }));
+  app.use(sessionStore);
 });
 
 //configure redis
@@ -39,7 +40,7 @@ io.configure('development', function(){
         // note that you will need to use the same key to grad the
         // session id, as you specified in the Express setup.
         handshakeData.sessionID = handshakeData.cookie['connect.sid'];
-        RedisStore.get(handshakeData.sessionID, function (err, session) {
+        sessionStore.get(handshakeData.sessionID, function (err, session) {
             if (err || !session) {
                 // if we cannot grab a session, turn down the connection
                 callback('Error', false);

@@ -39,6 +39,16 @@ io.configure('development', function(){
         // note that you will need to use the same key to grad the
         // session id, as you specified in the Express setup.
         handshakeData.sessionID = handshakeData.cookie['connect.sid'];
+        RedisStore.get(handshakeData.sessionID, function (err, session) {
+            if (err || !session) {
+                // if we cannot grab a session, turn down the connection
+                callback('Error', false);
+            } else {
+                // save the session data and accept the connection
+                handshakeData.session = session;
+                callback(null, true);
+            }
+        });
     } else {
        // if there isn't, turn down the connection with a message
        // and leave the function.
